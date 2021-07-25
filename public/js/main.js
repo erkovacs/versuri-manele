@@ -9,7 +9,7 @@
     }
     return ret;
   };
-  app.init = () => {
+  app.init = async () => {
     const order = document.getElementById("order");
     app
       ._range(1, 26)
@@ -19,6 +19,17 @@
           `<option value="${i}">${i}</option>`
         )
       );
+
+      const artistsCtrl = document.getElementById("artists");
+      const response = await fetch('/api/artists');
+      const artists = await response.json();
+      for (let artist in artists.data) {
+        if (!artist) continue;
+        artistsCtrl.insertAdjacentHTML(
+          "beforeend",
+          `<option value="${artist}">${artist}</option>`
+        );
+      }
   };
   app.error = msg => {
     const template = `<div class="col-md-12 alert alert-dismissible alert-danger" id="__alert">
@@ -36,13 +47,15 @@
     setTimeout(dismiss, app.TIMEOUT);
   };
   app.handleSubmit = async url => {
-    const text = document.getElementById("text");
+    const artists = document.getElementById("artists");
     const order = document.getElementById("order");
     const length = document.getElementById("length");
     const output = document.getElementById("output");
 
     const request = {
-      text: text.value,
+      artists: [...artists.options]
+        .filter(a => a.selected)
+        .map(a => a.value),
       order: order.value,
       length: length.value
     };

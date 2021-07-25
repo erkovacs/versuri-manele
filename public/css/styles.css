@@ -1,0 +1,6 @@
+#app label {
+  font-size: 1.3rem;
+}
+#app textarea {
+  min-height: 300px;
+}

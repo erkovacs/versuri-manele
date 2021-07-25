@@ -1,0 +1,23 @@
+{
+  "name": "poetry-machine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "echo \"starting app...\" && node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codepadawan93/poetry-machine.git"
+  },
+  "author": "kovaroberik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codepadawan93/poetry-machine/issues"
+  },
+  "homepage": "https://github.com/codepadawan93/poetry-machine#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

@@ -27,7 +27,7 @@
         if (!artist) continue;
         artistsCtrl.insertAdjacentHTML(
           "beforeend",
-          `<option value="${artist}">${artist}</option>`
+          `&nbsp;<label for="artists">${artist}</label><input type="checkbox" name="artists" value="${artist}"/>&nbsp;`
         );
       }
   };

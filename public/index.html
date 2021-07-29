@@ -8,36 +8,38 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="/css/styles.css"></link>
   </head>
-  <body>
+  <body id="page-body">
+      <br>
       <div class="container" id="app">
+        <br>
         <form action="/api/generate" id="generateText" class="col-md-12">
             <div class="form-group row">
-                <label for="artists" class="col-sm-2 col-form-label">Artists</label>
+                <label for="artists" class="col-sm-2">Artists</label>
                 <div class="col-md-10">
-                    <select name="artists" id="artists" class="custom-select" multiple="true">
-                    </select>
+                    <div name="artists" id="artists" multiple="true">
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="order" class="col-sm-2 col-form-label">Order (n)</label>
+                <label for="order" class="col-sm-2">Order (n)</label>
                 <div class="col-md-10">
-                    <select name="order" id="order" class="custom-select">
+                    <select name="order" id="order">
                         <option selected="">Select order</option>
                     </select>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="length" class="col-sm-2 col-form-label">Length</label>
+                <label for="length" class="col-sm-2">Length</label>
                 <div class="col-md-10">
-                    <input type="number" name="length" id="length" class="col-md-12 form-control"/>
+                    <input type="number" name="length" id="length" class="col-md-12"/>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Generate</button>
         </form>
         <div class="form-group row">
-            <label for="output" class="col-sm-2 col-form-label">Results</label>
+            <label for="output" class="col-sm-2">Results</label>
             <div class="col-md-10">
-                <textarea name="output" id="output" class="col-md-12 form-control" readonly></textarea>
+                <textarea name="output" id="output" class="col-md-12" readonly></textarea>
             </div>
         </div>
       </div>

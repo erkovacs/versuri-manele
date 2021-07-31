@@ -27,7 +27,7 @@
         if (!artist) continue;
         artistsCtrl.insertAdjacentHTML(
           "beforeend",
-          `&nbsp;<label for="artists">${artist}</label><input type="checkbox" name="artists" value="${artist}"/>&nbsp;`
+          `&nbsp;<label for="artists">${artist}</label>&nbsp;<input type="checkbox" name="artists" value="${artist}"/>&nbsp;`
         );
       }
   };
@@ -47,15 +47,20 @@
     setTimeout(dismiss, app.TIMEOUT);
   };
   app.handleSubmit = async url => {
-    const artists = document.getElementById("artists");
+    const artists = document.querySelectorAll("#artists input[type=checkbox]:checked");
     const order = document.getElementById("order");
     const length = document.getElementById("length");
     const output = document.getElementById("output");
+    
+    console.log(artists);
+    
+    const artistNames = [];
+    for (let artist of artists) {
+      artistNames.push(artist.value + '');
+    }
 
     const request = {
-      artists: [...artists.options]
-        .filter(a => a.selected)
-        .map(a => a.value),
+      artists: artistNames,
       order: order.value,
       length: length.value
     };

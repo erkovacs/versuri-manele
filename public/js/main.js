@@ -1,7 +1,11 @@
 (function(document, window) {
   const app = {};
   app.TIMEOUT = 5000;
+  app.THRESHOLD = 0.5;
+  app.MAX_LENGTH = 1000;
   app.appElement = document.getElementById("app");
+  app.randomiseBtn = document.getElementById("randomise");
+
   app._range = (a, b) => {
     const ret = [];
     for (let i = a; i < b; i++) {
@@ -9,6 +13,7 @@
     }
     return ret;
   };
+
   app.init = async () => {
     const order = document.getElementById("order");
     app
@@ -27,10 +32,12 @@
         if (!artist) continue;
         artistsCtrl.insertAdjacentHTML(
           "beforeend",
-          `&nbsp;<label for="artists">${artist}</label>&nbsp;<input type="checkbox" name="artists" value="${artist}"/>&nbsp;`
+          `<div class="col-md-4"><label for="artists">${artist}</label>
+          <input type="checkbox" name="artists" value="${artist}"/></div>`
         );
       }
   };
+
   app.error = msg => {
     const template = `<div class="col-md-12 alert alert-dismissible alert-danger" id="__alert">
       <button type="button" class="close" id="__alertDismiss">&times;</button>
@@ -46,13 +53,31 @@
       .addEventListener("click", dismiss);
     setTimeout(dismiss, app.TIMEOUT);
   };
+
+  app.handleRandomise = () => {
+    const artists = document.querySelectorAll("#artists input[type=checkbox]");
+    const order = document.getElementById("order");
+    const length = document.getElementById("length");
+    const output = document.getElementById("output");
+
+    for (let artist of artists) {
+      artist.checked = null;
+      if (Math.random() > app.THRESHOLD) {
+        artist.checked = "checked";
+      }
+    }
+
+    const option = 1 + Math.floor(Math.random() * 7);
+    order.options[option].selected = "selected";
+
+    length.value = Math.floor(Math.random() * app.MAX_LENGTH);
+  }
+
   app.handleSubmit = async url => {
     const artists = document.querySelectorAll("#artists input[type=checkbox]:checked");
     const order = document.getElementById("order");
     const length = document.getElementById("length");
     const output = document.getElementById("output");
-    
-    console.log(artists);
     
     const artistNames = [];
     for (let artist of artists) {
@@ -87,6 +112,11 @@
   form.addEventListener("submit", e => {
     e.preventDefault();
     app.handleSubmit(form.action);
+  });
+
+  app.randomiseBtn.addEventListener("click", e => {
+    e.preventDefault();
+    app.handleRandomise();
   });
 
   window.addEventListener("load", () => {

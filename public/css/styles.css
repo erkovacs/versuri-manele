@@ -7,10 +7,12 @@
   color: #ffffff;
   font-family: Courier;
   font-weight: bold;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 #app label {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 #app textarea {
